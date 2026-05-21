@@ -12,6 +12,7 @@ async function handleGenerateNewURL(req,res){
         shortId: shortID,
         redirectURL,
         visitHistory: [],
+        createdBy: req.user._id,
     })
     return res.render('home',{
         id: shortID,
