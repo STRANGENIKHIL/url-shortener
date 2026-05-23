@@ -8,16 +8,18 @@ const URL = require('./models/url');
 const staticRoute = require("./routes/staticrouter");
 const userRoute = require("./routes/user");
 const cookieParser = require('cookie-parser');
-const {restrictToLoggedInUsers , checkAuth} = require('./middlewares/auth');
+const {checkForAuthentication , restrictTo} = require('./middlewares/auth');
 
 connectToMongoDB('mongodb://localhost:27017/urlshortener').then(()=> console.log("Mongo DB connected"));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use("/" ,checkAuth, staticRoute);
+app.use(checkForAuthentication);
+
+app.use("/" , staticRoute);
 app.use('/user',  userRoute);
-app.use('/url',restrictToLoggedInUsers, urlRoute);
+app.use('/url',restrictTo(['Normal']), urlRoute);
 
 
 app.set('view engine' , "ejs");
