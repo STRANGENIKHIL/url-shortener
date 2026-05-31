@@ -1,6 +1,6 @@
 # URL Shortener
 
-A simple Node.js URL shortening service with user authentication, link analytics, and MongoDB persistence.
+A simple Node.js URL shortening service with user authentication, link analytics, and MongoDB persistence
 
 ## Features
 
